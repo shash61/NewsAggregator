@@ -7,6 +7,7 @@ const newsRouter = require('./routes/newsRouter/news');
 const verifyToken = require('./middlewares/authJWT');
 require('dotenv').config();
 const PORT =  process.env.PORT || 5055
+require('./cacheManager')
 
 app.get('/',(req,res)=>{
   console.log('request generated at root route')
@@ -24,8 +25,9 @@ mongoose.connect('mongodb://127.0.0.1:27017/playingaround',{
 
 db.on("error", console.error.bind(console, "connection error: "));
 db.once("open", function () {
-  console.log("Connected successfully");
+  console.log("db Connected successfully");
 });
+
 
 app.listen(PORT, ()=>{
   console.log(`server started on ${PORT}`)
